@@ -1,0 +1,19 @@
+<resources>
+
+    <string name="app_name">TabataTime</string>
+    <string name="contentDescription" />
+    <string name="title">[title]</string>
+    <string name="subtitle">[subtitle]</string>
+    <string name="description">[description]</string>
+    <string name="staticmaptitle">[staticmaptitle]</string>
+    <string name="search">Поиск</string>
+    <string name="titleTimer">ТАЙМЕРЫ</string>
+    <string name="drawer_title">Navigation</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="actionCreate">Добавить таймер</string>
+    <string name="actionSave">Сохранить таймер</string>
+    <string name="actionRepeate">Перезапустить</string>
+    <string name="actionSettings">Настройки</string>
+
+</resources>
