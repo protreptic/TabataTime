@@ -1,10 +1,19 @@
 package org.javaprotrepticon.android.tabatatime.activity;
 
+import java.sql.SQLException;
+import java.util.concurrent.ExecutionException;
+
 import org.javaprotrepticon.android.tabatatime.R;
 import org.javaprotrepticon.android.tabatatime.fragment.TimerListFragment;
+import org.javaprotrepticon.android.tabatatime.storage.Storage;
+import org.javaprotrepticon.android.tabatatime.storage.model.Exercise;
+import org.javaprotrepticon.android.tabatatime.storage.model.Timer;
+
+import com.j256.ormlite.table.TableUtils;
 
 import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -93,9 +102,39 @@ public class MainActivity extends ActionBarActivity {
     	
     }
     
+	public class PrepareStorage extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			Storage storage = new Storage(getBaseContext());
+			
+			try {
+				TableUtils.createTableIfNotExists(storage.getConnection(), Timer.class);
+				TableUtils.createTableIfNotExists(storage.getConnection(), Exercise.class);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			storage.closeConnection();
+			
+			return null;
+		}
+		
+	}
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		try {
+			PrepareStorage prepareStorage = new PrepareStorage();
+			prepareStorage.execute();
+			prepareStorage.get();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
 		
 		setContentView(R.layout.main_activity);
 		

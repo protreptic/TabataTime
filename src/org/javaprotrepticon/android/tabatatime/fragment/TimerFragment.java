@@ -82,6 +82,7 @@ public class TimerFragment extends Fragment {
 		
 		@Override
 		public void run() {
+			if (getActivity() == null) this.cancel(); else 
 			getActivity().runOnUiThread(new Runnable() {
 				
 				@Override

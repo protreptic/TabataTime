@@ -3,15 +3,12 @@ package org.javaprotrepticon.android.tabatatime.storage;
 import java.sql.SQLException;
 
 import org.javaprotrepticon.android.androidutils.Apps;
-import org.javaprotrepticon.android.tabatatime.storage.model.Exercise;
-import org.javaprotrepticon.android.tabatatime.storage.model.Timer;
 
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
-import com.j256.ormlite.table.TableUtils;
 
 public class Storage {
 	
@@ -30,12 +27,13 @@ public class Storage {
 		
 		try {
 			mConnection = new JdbcPooledConnectionSource("jdbc:h2:" + storageFolder + ";AUTO_SERVER=TRUE;"); 
-			
-			TableUtils.createTableIfNotExists(mConnection, Timer.class);
-			TableUtils.createTableIfNotExists(mConnection, Exercise.class);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public JdbcPooledConnectionSource getConnection() {
+		return mConnection;
 	}
 	
 	public void closeConnection() {

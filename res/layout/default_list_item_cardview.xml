@@ -7,7 +7,7 @@
     android:layout_margin="1dp"
     android:clickable="true"
     cardview:cardCornerRadius="1dp"
-    cardview:cardElevation="2dp" >
+    cardview:cardElevation="1dp" >
 
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
